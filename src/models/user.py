@@ -8,6 +8,7 @@ class User(db.Model):
     __tablename__ = 'users'
 
     user_id = db.Column(UUID(as_uuid=True), primary_key=True)
+    name = db.Column(db.String(80), unique=False)
     email_id = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(400), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now(
@@ -21,7 +22,7 @@ class User(db.Model):
     email_verified = db.Column(db.Boolean, default=False)
 
 
-    def __init__(self, user_id, email_id, password_hash, blood_group, gender, age, mobile_num):
+    def __init__(self, user_id, email_id, password_hash, blood_group, gender, age, mobile_num, name):
         self.user_id = user_id
         self.email_id = email_id
         self.password_hash = password_hash
@@ -29,6 +30,7 @@ class User(db.Model):
         self.gender = gender
         self.age = age
         self.mobile_num = mobile_num
+        self.name = name
     
 
     def __repr__(self):
@@ -42,5 +44,6 @@ class User(db.Model):
             "is_active": self.is_active,
             "email_verified": self.email_verified,
             "mobile_verified": self.mobile_verified,
-            "created_at": self.created_at
+            "created_at": self.created_at,
+            "name": self.name
         }
